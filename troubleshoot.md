@@ -194,3 +194,116 @@ Buka `http://127.0.0.1:8000` di browser. Jika kotaknya berwarna ungu (Tailwind j
 ✅ Akun Admin berhasil dibuat/diperbarui!
 📧 Email: admin@sekolah.sch.id
 🔑 Password: password123
+
+
+Jika kamu ingin mereset database dari nol dan mengisi ulang sekaligus, kamu bisa menggunakan perintah php artisan migrate:fresh --seed. Perintah ini akan menghapus semua tabel, membuat ulang, lalu menjalankan seeder. Sangat berguna saat pengembangan!)
+
+
+Jelaskan error pada logika PHP Liveware 3 berikut:
+app\Livewire\ManageGrades.php
+
+Property $grades has no type information available.
+public $grades;
+
+Property $gradeId has no type information available.
+public $gradeId;
+
+Parameter $id has no type information available.
+public function delete($id)
+
+Solusi:
+public array $grades;
+public int $gradeId;
+public function delete(int $id)
+
+
+
+Problem:
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // <-- 2. TAMBAHKAN RUTE INI DI SINI
+    Route::get('/grades', ManageGrades::class)->name('grades.manage');
+});
+
+Symfony \ Component \ Routing \ Exception \ RouteNotFoundException
+Route [profile] not defined.
+C:\xampp\htdocs\simaw\resources\views\livewire\layout\navigation.blade.php : 44
+<div x-data="{{ json_encode(['name' => auth()->user()->name]) }}" x-text="name" x-on:profile-updated.window="name = $event.detail.name"></div>
+
+Saya menggunakan pendekatan
+<?php
+
+use App\Http\Controllers\ProfileController;
+use App\Livewire\ManageGrades;
+use Illuminate\Support\Facades\Route;
+
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+Route::get('/grades', ManageGrades::class)->name('grades.manage');
+
+
+require __DIR__.'/auth.php';
+
+/grades bisa diakses tetapi menu tambah kelas, edit tidak bisa diakses, menu hapus bisa tetapi diklik cancel data tetap terhapus
+
+Solusi:
+<?php
+
+use App\Livewire\ManageGrades; // Import komponen Livewire kita
+use Illuminate\Support\Facades\Route;
+
+Route::view('/', 'welcome');
+
+Route::view('dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::view('profile', 'profile')
+    ->middleware(['auth'])
+    ->name('profile');
+
+// Grup rute yang HANYA bisa diakses jika sudah login
+Route::middleware('auth')->group(function () {
+    // Rute Kustom Kita untuk Panel Guru
+    Route::get('/grades', ManageGrades::class)->name('grades.manage');
+});
+
+require __DIR__.'/auth.php';
+
+
+Solusi untuk tombol edit, hapus, tambah
+🛠️ Solusi Komprehensif
+Langkah 1: Buat Layout Custom untuk Panel Guru
+Langkah 2: Update Komponen Livewire untuk Menggunakan Layout Baru
+// GANTI INI:
+// #[Layout('layouts.app')]
+
+// MENJADI INI:
+#[Layout('layouts.panel')]
+
+Langkah 3: Perbaikan Blade View dengan $wire.entangle()
+Buka resources/views/livewire/manage-grades.blade.php dan ganti seluruh isinya
+
+
+Solusi untuk background
+perbaikan pada: resources/views/livewire/grade-manager.blade.php
+
+Menghapus seluruh tag <style>...</style> dari komponen Livewire.
+Mengganti animate-morph-bg menjadi morph-bg.
+Menggunakan @entangle('isModalOpen') yang lebih stabil pada kombinasi Livewire + Alpine.
+Tidak lagi bergantung pada CSS yang berada di dalam DOM Livewire.
+
+Pindahkan animasi ke resources/css/app.css
+
+

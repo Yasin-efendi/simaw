@@ -1,3 +1,54 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* =====================================================
+   Morphing Animated Background
+   Tailwind 3.1 + Laravel Breeze + Livewire
+   ===================================================== */
+
+@keyframes morphBg {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 100% 50%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    75% {
+        background-position: 0% 100%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.morph-bg {
+    background: linear-gradient(
+        -45deg,
+        #3b82f6,
+        #8b5cf6,
+        #ec4899,
+        #06b6d4,
+        #6366f1
+    );
+
+    background-size: 600% 600%;
+    animation: morphBg 25s ease infinite;
+
+    position: relative;
+}
+
+
+/* Efek glassmorphism opsional */
+.glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
