@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Grade;
+use App\Models\Meeting;
+use App\Models\Question;
+use App\Models\Quiz;
+use App\Models\Subject;
+use App\Models\Topic;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +17,35 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Kita buat 2 Kelas (Grade)
+        Grade::factory()
+            ->count(2)
+            ->has(
+                // Setiap Kelas punya 2 Mata Pelajaran (Subject)
+                Subject::factory()
+                    ->count(2)
+                    ->has(
+                        // Setiap Mata Pelajaran punya 2 Bab (Topic)
+                        Topic::factory()
+                            ->count(2)
+                            ->has(
+                                // Setiap Bab punya 2 Pertemuan (Meeting)
+                                Meeting::factory()
+                                    ->count(2)
+                                    ->has(
+                                        // Setiap Pertemuan punya 2 Kuis (Quiz)
+                                        Quiz::factory()
+                                            ->count(2)
+                                            ->has(
+                                                // Setiap Kuis punya 5 Soal (Question)
+                                                Question::factory()->count(5)
+                                            )
+                                    )
+                            )
+                    )
+            )
+            ->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->command->info('✅ Data dummy berhasil dibuat dengan hierarki yang lengkap!');
     }
 }
