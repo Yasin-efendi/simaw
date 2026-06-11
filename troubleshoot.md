@@ -191,3 +191,6 @@ Untuk memastikan semuanya (Laravel, Livewire, Tailwind, dan Alpine) bekerja harm
 
 Buka `http://127.0.0.1:8000` di browser. Jika kotaknya berwarna ungu (Tailwind jalan) dan tombolnya bisa diklik untuk memunculkan teks (Alpine jalan), maka seluruh *requirements* proyek Anda telah terpenuhi dan terverifikasi 100%.
 
+✅ Akun Admin berhasil dibuat/diperbarui!
+📧 Email: admin@sekolah.sch.id
+🔑 Password: password123

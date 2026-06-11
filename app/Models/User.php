@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role', // <-- TAMBAHKAN INI agar bisa diisi saat registrasi/pembuatan user
     ];
 
     /**
@@ -43,5 +44,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Helper Method: Cek apakah user adalah Admin.
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    /**
+     * Helper Method: Cek apakah user adalah Guru.
+     */
+    public function isGuru(): bool
+    {
+        return $this->role === 'guru';
     }
 }
