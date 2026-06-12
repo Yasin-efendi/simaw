@@ -307,3 +307,25 @@ Tidak lagi bergantung pada CSS yang berada di dalam DOM Livewire.
 Pindahkan animasi ke resources/css/app.css
 
 
+tapi saya mendapati warning berikut, tolong koreksi:
+app\Livewire\ManageQuestions.php
+public $image = null; // Instance UploadedFile
+Property $image has no type information available.
+
+Solusi:
+use Illuminate\Http\UploadedFile; //import ini
+public ?UploadedFile $image = null; // Instance UploadedFile
+
+
+app\Livewire\ManageQuestions.php
+$this->questions = Question::with('meeting')->orderBy('id', 'desc')->get();
+error:
+Call to undefined relationship [meeting] on model [App\Models\Question].
+
+Analisa:
+model Question tidak memiliki hubungan langsung dengan Meeting
+Solusi:
+Question::with('quiz.meeting'). Halaman /questions bisa diakses tetapi tidak bisa menambah pertanyaan dengan keterangan error:
+
+SQLSTATE[HY000]: General error: 1364 Field 'quiz_id' doesn't have a default value
+app\Livewire\ManageQuestions.php : 121
