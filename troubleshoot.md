@@ -329,3 +329,49 @@ Question::with('quiz.meeting'). Halaman /questions bisa diakses tetapi tidak bis
 
 SQLSTATE[HY000]: General error: 1364 Field 'quiz_id' doesn't have a default value
 app\Livewire\ManageQuestions.php : 121
+
+
+Error di Laravel 11, liveware 3
+
+Undefined variable $progressPercentage
+view:
+<span class="text-xs font-semibold text-purple-600 bg-purple-100 px-2 py-1 rounded-full">
+
+                    {{ round($progressPercentage) }}% Selesai
+
+                </span>
+
+
+class:
+    // Helper untuk menghitung progress bar (0 - 100)
+    public function getProgressPercentageProperty(): float
+    {
+        return (($this->currentIndex + 1) / $this->questions->count()) * 100;
+    }
+
+Solusi:
+file perubahan terakhir di class dan view.
+
+    #[Computed]
+    public function progressPercentage(): float
+    {
+        // Pastikan count() tidak 0 untuk menghindari error division by zero
+        if ($this->questions->count() === 0) {
+            return 0;
+        }
+
+        return (($this->currentIndex + 1) / $this->questions->count()) * 100;
+    }
+
+view:
+{{ round($this->progressPercentage) }}% Selesai
+
+error Livewire only supports one HTML element per component. Multiple root elements detected for component
+
+2 root dalam 1 html
+<div class="min-h-screen morph-bg p-4 pb-24">...</div>
+dan
+<style>...</style> di bagian paling bawah.
+
+Solusi:
+Bungkus tag <style> tersebut agar masuk ke dalam <div> utama (elemen root pertama).

@@ -21,6 +21,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/topics', \App\Livewire\ManageTopics::class)->name('topics.manage');
     Route::get('/meetings', \App\Livewire\ManageMeetings::class)->name('meetings.manage');
     Route::get('/questions', \App\Livewire\ManageQuestions::class)->name('questions.manage');
+
+
 });
+
+// Route Publik untuk Siswa (Tanpa Login)
+Route::get('/quiz/{quiz}', \App\Livewire\QuizEntry::class)->name('quiz.entry');
+
+Route::get('/quiz/take/{quiz}', \App\Livewire\QuizTake::class)->name('quiz.take');
+
+Route::get('/quiz/result/{attempt}', \App\Livewire\QuizResult::class)->name('quiz.result');
 
 require __DIR__.'/auth.php';

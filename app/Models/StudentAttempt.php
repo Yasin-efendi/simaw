@@ -36,9 +36,10 @@ class StudentAttempt extends Model
 
     /**
      * Relasi: Satu StudentAttempt memiliki banyak AttemptAnswer (Detail Jawaban).
+     * PENTING: Sebutkan nama kolom foreign key 'attempt_id' secara eksplisit untuk menghindari kesalahan relasi.
      */
     public function attemptAnswers(): HasMany
     {
-        return $this->hasMany(AttemptAnswer::class);
+        return $this->hasMany(AttemptAnswer::class, 'attempt_id');
     }
 }
