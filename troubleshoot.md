@@ -257,7 +257,7 @@ require __DIR__.'/auth.php';
 
 /grades bisa diakses tetapi menu tambah kelas, edit tidak bisa diakses, menu hapus bisa tetapi diklik cancel data tetap terhapus
 
-Solusi:
+Solusi, pastikan kode sesuai dengan keonvensi Breeze Liveware:
 <?php
 
 use App\Livewire\ManageGrades; // Import komponen Livewire kita

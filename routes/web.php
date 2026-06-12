@@ -17,6 +17,9 @@ Route::view('profile', 'profile')
 Route::middleware('auth')->group(function () {
     // Rute Kustom Kita untuk Panel Guru
     Route::get('/grades', ManageGrades::class)->name('grades.manage');
+    Route::get('/subjects', \App\Livewire\ManageSubjects::class)->name('subjects.manage');
+    Route::get('/topics', \App\Livewire\ManageTopics::class)->name('topics.manage');
+    Route::get('/meetings', \App\Livewire\ManageMeetings::class)->name('meetings.manage');
 });
 
 require __DIR__.'/auth.php';
