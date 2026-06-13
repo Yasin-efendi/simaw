@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/topics', \App\Livewire\ManageTopics::class)->name('topics.manage');
     Route::get('/meetings', \App\Livewire\ManageMeetings::class)->name('meetings.manage');
     Route::get('/questions', \App\Livewire\ManageQuestions::class)->name('questions.manage');
+    Route::get('/quiz/{quiz}/leaderboard', \App\Livewire\QuizLeaderboard::class)->name('quiz.leaderboard');
 
 
 });
