@@ -375,3 +375,13 @@ dan
 
 Solusi:
 Bungkus tag <style> tersebut agar masuk ke dalam <div> utama (elemen root pertama).
+
+
+---
+
+### 💡 Tips Tambahan untuk GitHub Kamu:
+1. **Ganti `username-anda`** di bagian `git clone` dengan username GitHub asli kamu.
+2. Pastikan file `LICENSE` (tipe MIT) sudah ada di root folder jika kamu menyertakan badge lisensi.
+3. Kamu bisa menambahkan **Screenshot** aplikasi (misalnya: tampilan kuis di HP, leaderboard, dan modal pembahasan) di bagian atas README (setelah badge) menggunakan tag `<img>` atau `![Deskripsi](link-gambar)` agar repository kamu terlihat jauh lebih menarik dan profesional di mata recruiter atau pengguna lain.
+
+Apakah ada bagian dari README ini yang ingin kamu tambahkan atau ubah?
